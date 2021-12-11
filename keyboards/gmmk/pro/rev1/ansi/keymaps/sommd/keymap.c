@@ -61,6 +61,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 #ifdef ENCODER_ENABLE
+
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (clockwise) {
         tap_code(KC_VOLU);
@@ -69,9 +70,10 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     }
     return true;
 }
+
 #endif  // ENCODER_ENABLE
 
-// RGB LED layout
+#ifdef RGB_MATRIX_ENABLE
 
 // 67 Side  0 Esc    6 F1     12 F2    18 F3    23 F4    28 F5    34 F6    39 F7    44 F8    50 F9    56 F10   61 F11     66 F12   69 Del            68 Side
 // 70 Side  1 `~     7 1      13 2     19 3     24 4     29 5     35 6     40 7     45 8     51 9     57 0     62 -_      78 =+    85 Bspc  72 Home  71 Side
@@ -87,3 +89,5 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         RGB_MATRIX_INDICATOR_SET_COLOR(3, 0, 0, 0);
     }
 }
+
+#endif  // RGB_MATRIX_ENABLE
