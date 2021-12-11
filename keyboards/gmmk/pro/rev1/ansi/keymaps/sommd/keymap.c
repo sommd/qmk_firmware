@@ -19,11 +19,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-//      ESC      F1       F2       F3       F4       F5       F6       F7       F8       F9       F10      F11      F12	     Prt           Rotary(Mute)
-//      ~        1        2        3        4        5        6        7        8        9        0         -       (=)	     BackSpc           Del
-//      Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]        \                 PgUp
-//      Caps     A        S        D        F        G        H        J        K        L        ;        "                 Enter             PgDn
-//      Sh_L              Z        X        C        V        B        N        M        ,        .        ?                 Sh_R     Up       End
+//      ESC      F1       F2       F3       F4       F5       F6       F7       F8       F9       F10      F11      F12	     Del           Rotary(Mute)
+//      ~        1        2        3        4        5        6        7        8        9        0         -       (=)	     BackSpc           Home
+//      Tab      Q        W        E        R        T        Y        U        I        O        P        [        ]        \                 End
+//      Caps     A        S        D        F        G        H        J        K        L        ;        "                 Enter             PgUp
+//      Sh_L              Z        X        C        V        B        N        M        ,        .        ?                 Sh_R     Up       PgDn
 //      Ct_L     Win_L    Alt_L                               SPACE                               Alt_R    FN       Ct_R     Left     Down     Right
 
 
@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [1] = LAYOUT(
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_CALC, KC_PSCR,          _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_CALC, KC_PSCR, KC_INS,           _______,
         _______, RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_MPRV,
         _______, _______, RGB_VAI, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET,            KC_MNXT,
         _______, _______, RGB_VAD, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,
@@ -70,3 +70,20 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     return true;
 }
 #endif // ENCODER_ENABLE
+
+// RGB LED layout
+
+// 67 Side  0 Esc    6 F1     12 F2    18 F3    23 F4    28 F5    34 F6    39 F7    44 F8    50 F9    56 F10   61 F11     66 F12   69 Del            68 Side
+// 70 Side  1 `~     7 1      13 2     19 3     24 4     29 5     35 6     40 7     45 8     51 9     57 0     62 -_      78 =+    85 Bspc  72 Home  71 Side
+// 73 Side  2 Tab    8 Q      14 W     20 E     25 R     30 T     36 Y     41 U     46 I     52 O     58 P     63 [{      89 ]}    93 \|    75 End   74 Side
+// 76 Side  3 Caps   9 A      15 S     21 D     26 F     31 G     37 H     42 J     47 K     53 L     59 ;:    64 '"               96 Enter 86 PgUp  77 Side
+// 80 Side  4 Shift  10 Z     16 X     22 C     27 V     32 B     38 N     43 M     48 ,<    54 .<    60 /?               90 Shift 94 Up    82 PgDn  81 Side
+// 83 Side  5 Ctrl   11 Win   17 Alt                     33 SPACE                   49 Alt   55 FN             65 Ctrl    95 Left  97 Down  79 Right 84 Side
+// 87 Side                                                                                                                                           88 Side
+// 91 Side                                                                                                                                           92 Side
+
+void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if (IS_HOST_LED_ON(USB_LED_CAPS_LOCK)) {
+        RGB_MATRIX_INDICATOR_SET_COLOR(3, 0, 0, 0);
+    }
+}
