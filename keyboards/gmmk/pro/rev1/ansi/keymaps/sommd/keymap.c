@@ -16,6 +16,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
+enum custom_keycodes { CK_RGB1 = SAFE_RANGE, CK_RGB2, CK_RGB3, CK_RGB4, CK_RGB5, CK_RGB6, CK_RGB7, CK_RGB8, CK_RGB9, CK_RGB0 };
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -49,9 +51,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [1] = LAYOUT(
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_CALC, KC_PSCR,          KC_INS,
-        RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
-        RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, _______, _______, _______, _______, _______, _______, _______, _______, RESET,            _______,
-        _______, RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,
+        RGB_TOG, CK_RGB1, CK_RGB2, CK_RGB3, CK_RGB4, CK_RGB5, CK_RGB6, CK_RGB7, CK_RGB8, CK_RGB9, CK_RGB0, RGB_VAD, RGB_VAI, _______,          _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET,            _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,
         _______,          _______, _______, _______, _______, _______, NK_TOGG, _______, _______, _______, _______,          _______, _______, _______,
         _______, _______, _______,                            _______,                            _______, _______, _______, KC_MPRV, KC_MPLY, KC_MNXT
     ),
@@ -59,6 +61,60 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 // clang-format on
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (keycode >= CK_RGB1 && keycode <= CK_RGB0) {
+        rgb_matrix_enable();
+
+        uint8_t val = rgb_matrix_get_val();
+        switch (keycode) {
+            case CK_RGB1:  // Ranbow spiral
+                rgb_matrix_mode(RGB_MATRIX_CYCLE_SPIRAL);
+                rgb_matrix_sethsv(0, 255, val);
+                break;
+            case CK_RGB2:  // Solid white
+                rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
+                rgb_matrix_sethsv(0, 0, val);
+                break;
+            case CK_RGB3:  // Solid red
+                rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
+                rgb_matrix_sethsv(0, 255, val);
+                break;
+            case CK_RGB4:  // Solid yellow
+                rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
+                rgb_matrix_sethsv(32, 255, val);
+                break;
+            case CK_RGB5:  // Solid lime
+                rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
+                rgb_matrix_sethsv(64, 255, val);
+                break;
+            case CK_RGB6:  // Solid green
+                rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
+                rgb_matrix_sethsv(96, 255, val);
+                break;
+            case CK_RGB7:  // Solid aqua
+                rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
+                rgb_matrix_sethsv(128, 255, val);
+                break;
+            case CK_RGB8:  // Solid blue
+                rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
+                rgb_matrix_sethsv(160, 255, val);
+                break;
+            case CK_RGB9:  // Solid purple
+                rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
+                rgb_matrix_sethsv(192, 255, val);
+                break;
+            case CK_RGB0:  // Solid pink
+                rgb_matrix_mode(RGB_MATRIX_SOLID_COLOR);
+                rgb_matrix_sethsv(224, 255, val);
+                break;
+        }
+
+        return false;
+    } else {
+        return true;
+    }
+}
 
 #ifdef ENCODER_ENABLE
 
