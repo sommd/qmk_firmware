@@ -66,7 +66,7 @@ const HSV PROGMEM rgb_colors[CK_RGB0 - CK_RGB1 + 1] = {
     // RGB_MATRIX_CYCLE_SPIRAL color
     {HSV_RED},
     // RGB_MATRIX_SOLID_COLOR colors
-    {HSV_AZURE},
+    {HSV_WHITE},
     {HSV_PURPLE},
     {HSV_MAGENTA},
     {HSV_PINK},
