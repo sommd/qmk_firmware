@@ -1,5 +1,8 @@
 #pragma once
 
+// Allow Fn+Key to work when Fn released before Key
+#define HOLD_ON_OTHER_KEY_PRESS
+
 // Turn off RGB when suspended
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
