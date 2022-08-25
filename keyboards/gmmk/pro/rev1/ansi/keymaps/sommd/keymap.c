@@ -107,7 +107,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     return true;
 }
 
-#endif  // ENCODER_ENABLE
+#endif // ENCODER_ENABLE
 
 #ifdef RGB_MATRIX_ENABLE
 
@@ -126,4 +126,4 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     }
 }
 
-#endif  // RGB_MATRIX_ENABLE
+#endif // RGB_MATRIX_ENABLE
