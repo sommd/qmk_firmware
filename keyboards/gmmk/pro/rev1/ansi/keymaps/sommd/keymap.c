@@ -65,6 +65,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
+void eeconfig_init_user(void) {
+    keymap_config.nkro = 1;
+    eeconfig_update_keymap(keymap_config.raw);
+}
+
 #ifdef RGB_MATRIX_ENABLE
 
 const HSV PROGMEM rgb_colors[CK_RGB0 - CK_RGB1 + 1] = {
