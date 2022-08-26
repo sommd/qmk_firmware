@@ -65,6 +65,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
+#ifdef RGB_MATRIX_ENABLE
+
 const HSV PROGMEM rgb_colors[CK_RGB0 - CK_RGB1 + 1] = {
     // RGB_MATRIX_CYCLE_SPIRAL color
     {RGB_MATRIX_STARTUP_HUE, RGB_MATRIX_STARTUP_SAT, RGB_MATRIX_STARTUP_VAL},
@@ -96,21 +98,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-#ifdef ENCODER_ENABLE
-
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (IS_LAYER_ON(1)) {
-        tap_code_delay(clockwise ? KC_BRIGHTNESS_UP : KC_BRIGHTNESS_DOWN, 10);
-        return false;
-    } else {
-        return true;
-    }
-}
-
-#endif // ENCODER_ENABLE
-
-#ifdef RGB_MATRIX_ENABLE
-
 // 67 Side  0 Esc    6 F1     12 F2    18 F3    23 F4    28 F5    34 F6    39 F7    44 F8    50 F9    56 F10   61 F11     66 F12   69 Del            68 Side
 // 70 Side  1 `~     7 1      13 2     19 3     24 4     29 5     35 6     40 7     45 8     51 9     57 0     62 -_      78 =+    85 Bspc  72 Home  71 Side
 // 73 Side  2 Tab    8 Q      14 W     20 E     25 R     30 T     36 Y     41 U     46 I     52 O     58 P     63 [{      89 ]}    93 \|    75 End   74 Side
@@ -127,3 +114,16 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 }
 
 #endif // RGB_MATRIX_ENABLE
+
+#ifdef ENCODER_ENABLE
+
+bool encoder_update_user(uint8_t index, bool clockwise) {
+    if (IS_LAYER_ON(1)) {
+        tap_code_delay(clockwise ? KC_BRIGHTNESS_UP : KC_BRIGHTNESS_DOWN, 10);
+        return false;
+    } else {
+        return true;
+    }
+}
+
+#endif // ENCODER_ENABLE
