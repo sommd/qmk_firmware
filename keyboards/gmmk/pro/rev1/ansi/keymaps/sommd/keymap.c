@@ -96,20 +96,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-#ifdef ENCODER_ENABLE
-
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    bool layer0 = layer_state_is(0);
-    if (clockwise) {
-        tap_code(layer0 ? KC_AUDIO_VOL_UP : KC_BRIGHTNESS_UP);
-    } else {
-        tap_code(layer0 ? KC_AUDIO_VOL_DOWN : KC_BRIGHTNESS_DOWN);
-    }
-    return true;
-}
-
-#endif // ENCODER_ENABLE
-
 #ifdef RGB_MATRIX_ENABLE
 
 // 67 Side  0 Esc    6 F1     12 F2    18 F3    23 F4    28 F5    34 F6    39 F7    44 F8    50 F9    56 F10   61 F11     66 F12   69 Del            68 Side
